@@ -6,12 +6,12 @@ test.describe('Logout tests', () => {
         await loginPage.loginWithValidCredentials();
     });
     
-    test('Verify user can log out successfully @Regression,@Smoke',  ({ page, homePage }) => {
+    test('Verify user can log out successfully @Regression,@Smoke', async ({ page, homePage }) => {
         test.info().annotations.push({ 
             type: 'Test', 
             description: 'this test verifies that a user can log out successfully and is redirected to the login page' 
         });
-         test.step('Log out from the application', async () => {
+        await test.step('Log out from the application', async () => {
             await homePage.clickOnMenuButton();
             await homePage.clickOnLogoutButton();
         });
