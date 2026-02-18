@@ -18,6 +18,7 @@ export class HomePage {
     title: Locator;
     filterDropdown: Locator;
     title2: Locator;
+    cartBadge: Locator;
     
     constructor(page: Page) {
         this.page = page;
@@ -37,6 +38,7 @@ export class HomePage {
         this.title = page.getByText('Swag Labs');
         this.filterDropdown = page.locator('.product_sort_container');
         this.title2 = page.getByText('Products');
+        this.cartBadge = page.locator('//span[@class="shopping_cart_badge"]');
 
 
     }
