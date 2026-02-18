@@ -8,6 +8,12 @@ export class HomePage {
     item4: Locator;
     item5: Locator;
     item6: Locator;
+    addToCartButton1: Locator;
+    addToCartButton2: Locator;
+    addToCartButton3: Locator;
+    addToCartButton4: Locator;
+    addToCartButton5: Locator;
+    addToCartButton6: Locator;
     
     constructor(page: Page) {
         this.page = page;
@@ -17,6 +23,12 @@ export class HomePage {
         this.item4 = page.locator('#item_5_title_link');
         this.item5 = page.locator('#item_2_title_link');
         this.item6 = page.locator('#item_3_title_link');
+        this.addToCartButton1 = page.locator('#add-to-cart-sauce-labs-backpack');
+        this.addToCartButton2 = page.locator('#add-to-cart-sauce-labs-bike-light');
+        this.addToCartButton3 = page.locator('#add-to-cart-sauce-labs-bolt-t-shirt');
+        this.addToCartButton4 = page.locator('#add-to-cart-sauce-labs-fleece-jacket');
+        this.addToCartButton5 = page.locator('#add-to-cart-sauce-labs-onesie');
+        this.addToCartButton6 = page.locator('#add-to-cart-test.allthethings()-t-shirt-red');
     }
     async clickOnItem1() {
         await this.item1.click();
