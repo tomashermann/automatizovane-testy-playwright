@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1901","login with locked out user","chromium","2026-02-18","passed","2026-02-18","Login tests","login.spec.ts","",""
+"","1900","login with invalid password","chromium","2026-02-18","passed","2026-02-18","Login tests","login.spec.ts","",""
+"","1863","login with empty credentials","chromium","2026-02-18","passed","2026-02-18","Login tests","login.spec.ts","",""
+"","1907","login with invalid email","chromium","2026-02-18","passed","2026-02-18","Login tests","login.spec.ts","",""
+"","1952","login with valid credentials","chromium","2026-02-18","passed","2026-02-18","Login tests","login.spec.ts","",""
+"","1388","login with invalid email and password","chromium","2026-02-18","passed","2026-02-18","Login tests","login.spec.ts","",""
