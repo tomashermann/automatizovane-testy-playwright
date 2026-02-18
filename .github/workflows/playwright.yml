@@ -27,18 +27,20 @@ jobs:
         retention-days: 30
 
     # --- TADY ZAČÍNAJÍ NOTIFIKACE ---
-    - name: Slack Notification on Success
-      if: success()
+    - name: Slack Notification
+      if: always() # Spustí se vždy, barvu a text určíme dynamicky
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_MESSAGE: '✅ Testy v projektu proběhly úspěšně! 🚀'
-        SLACK_TITLE: 'Playwright Success'
-
-    - name: Slack Notification on Failure
-      if: failure()
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_MESSAGE: '❌ Testy selhaly! Prověř to na GitHubu.'
-        SLACK_TITLE: 'Playwright Failure'
+        SLACK_TITLE: 'Test Report: Project TEST AUTOMATION'
+        SLACK_USERNAME: 'Playwright-Bot'
+        SLACK_ICON: https://playwright.dev/img/playwright-logo.svg
+        # Dynamická barva podle výsledku
+        SLACK_COLOR: ${{ job.status == 'success' && '#32a852' || '#ff0000' }}
+        SLACK_MESSAGE: |
+          *Status:* ${{ job.status == 'success' && '✅ PASSED' || '❌ FAILED' }}
+          *Author:* ${{ github.actor }}
+          *Branch:* `${{ github.ref_name }}`
+          *Commit:* ${{ github.event.head_commit.message }}
+          *Workflow:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|Zobrazit detaily v GitHubu>
+        SLACK_FOOTER: 'Playwright Automated Testing'
