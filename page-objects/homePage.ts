@@ -19,6 +19,12 @@ export class HomePage {
     filterDropdown: Locator;
     title2: Locator;
     cartBadge: Locator;
+    removeButtonItem1: Locator;
+    removeButtonItem2: Locator;
+    removeButtonItem3: Locator;
+    removeButtonItem4: Locator;
+    removeButtonItem5: Locator;
+    removeButtonItem6: Locator;
     
     constructor(page: Page) {
         this.page = page;
@@ -39,6 +45,12 @@ export class HomePage {
         this.filterDropdown = page.locator('.product_sort_container');
         this.title2 = page.getByText('Products');
         this.cartBadge = page.locator('//span[@class="shopping_cart_badge"]');
+        this.removeButtonItem1 = page.locator('#remove-sauce-labs-backpack');
+        this.removeButtonItem2 = page.locator('#remove-sauce-labs-bike-light');
+        this.removeButtonItem3 = page.locator('#remove-sauce-labs-bolt-t-shirt');
+        this.removeButtonItem4 = page.locator('#remove-sauce-labs-fleece-jacket');
+        this.removeButtonItem5 = page.locator('#remove-sauce-labs-onesie');
+        this.removeButtonItem6 = page.locator('//button[contains(@id, "allthethings") and contains(text(), "Remove")]');
 
 
     }
