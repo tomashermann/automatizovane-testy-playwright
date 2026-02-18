@@ -25,3 +25,22 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+
+    # --- TADY ZAČÍNAJÍ NOTIFIKACE ---
+    - name: Slack Notification on Success
+      if: success()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_MESSAGE: '✅ Testy v projektu TEST AUTOMATION proběhly úspěšně! 🚀'
+        SLACK_TITLE: 'Playwright Success'
+        SLACK_COLOR: '#32a852'
+
+    - name: Slack Notification on Failure
+      if: failure()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_MESSAGE: '❌ Testy v projektu TEST AUTOMATION selhaly! Prověřte reporty v GitHub Actions.'
+        SLACK_TITLE: 'Playwright Failure'
+        SLACK_COLOR: '#ff0000'
