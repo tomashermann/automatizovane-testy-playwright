@@ -47,4 +47,35 @@ import { SauceLabsPage } from '../page-objects/sauceLabsPage';
             await expect(homePage.title2).toBeVisible();
          });
     });
+
+    test('Verify adding item to cart and cart badge update @Regression,@Smoke', async ({ homePage }) => {
+        test.info().annotations.push({ 
+            type: 'Test', 
+            description: 'this test verifies that when an item is added to the cart, the cart badge is updated with the correct number of items' 
+        });
+        await test.step('Add item to cart and verify cart badge update', async () => {
+            await homePage.addToCartButton1.click();
+            await expect(homePage.cartBadge).toHaveText('1');
+        });
+        await test.step('Add another item to cart and verify cart badge update', async () => {
+            await homePage.addToCartButton2.click();
+            await expect(homePage.cartBadge).toHaveText('2');
+         });
+        await test.step('Add third item to cart and verify cart badge update', async () => {
+            await homePage.addToCartButton3.click();
+            await expect(homePage.cartBadge).toHaveText('3');
+        });
+        await test.step('Add fourth item to cart and verify cart badge update', async () => {
+            await homePage.addToCartButton4.click();
+            await expect(homePage.cartBadge).toHaveText('4');
+        });
+        await test.step('Add fifth item to cart and verify cart badge update', async () => {
+            await homePage.addToCartButton5.click();
+            await expect(homePage.cartBadge).toHaveText('5');
+        });
+        await test.step('Add sixth item to cart and verify cart badge update', async () => {
+            await homePage.addToCartButton6.click();
+            await expect(homePage.cartBadge).toHaveText('6');
+         });
+    });
 });
