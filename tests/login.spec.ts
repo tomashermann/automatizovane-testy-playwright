@@ -70,7 +70,7 @@ test.describe('Login tests', () => {
                 await expect(loginPage.errorMessageInvalidCredentials).toBeVisible();
             });
         });
-        test('login with invalid email and password @Regression', async ({ page, loginPage }) => {
+        test('login with invalid email and password @Regression,@Smoke', async ({ page, loginPage }) => {
             test.info().annotations.push({ 
                 type: 'Test', 
                 description: 'this test verifies that an error message is displayed when trying to log in with an invalid email and password' 
