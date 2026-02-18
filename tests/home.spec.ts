@@ -1,4 +1,5 @@
 import test, { expect } from '../fixtures/basePages';
+import { SauceLabsPage } from '../page-objects/sauceLabsPage';
 
 test.describe('Home tests', () => {
     test.beforeEach(async ({ loginPage }) => {
@@ -40,5 +41,25 @@ test.describe('Home tests', () => {
             await expect(homePage.addToCartButton6).toBeVisible();
          });
     });
+
+    test('verify that a user can click on an item and is redirected to the correct page @Regression,@Smoke', async ({ page, homePage, sauceLabsPage }) => {
+        test.info().annotations.push({ 
+            type: 'Test', 
+            description: 'this test verifies that a user can click on an item and is redirected to the correct page' 
+        });
+        await test.step('Click on the first item', async () => {
+            await homePage.clickOnItem1();
+        await test.step('Verify that the user is redirected to the correct page', async () => {
+                await expect(page).toHaveURL('https://www.saucedemo.com/inventory-item.html?id=4');
+        await test.step('Verify that the item details are visible', async () => {
+            await expect(sauceLabsPage.image).toBeVisible();
+            await expect(sauceLabsPage.title).toBeVisible();
+            await expect(sauceLabsPage.description).toBeVisible();
+            await expect(sauceLabsPage.price).toBeVisible();
+            await expect(sauceLabsPage.addToCartButton).toBeVisible();
+                
+                });
+            });
+        });
+    });
 });
- 
