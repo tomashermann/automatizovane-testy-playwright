@@ -25,6 +25,8 @@ export class HomePage {
     removeButtonItem4: Locator;
     removeButtonItem5: Locator;
     removeButtonItem6: Locator;
+    menuButton: Locator;
+    logoutButton: Locator;
     
     constructor(page: Page) {
         this.page = page;
@@ -51,7 +53,9 @@ export class HomePage {
         this.removeButtonItem4 = page.locator('#remove-sauce-labs-fleece-jacket');
         this.removeButtonItem5 = page.locator('#remove-sauce-labs-onesie');
         this.removeButtonItem6 = page.locator('//button[contains(@id, "allthethings") and contains(text(), "Remove")]');
-
+        this.menuButton = page.locator('#react-burger-menu-btn');
+        this.logoutButton = page.locator('#logout_sidebar_link');
+        
 
     }
     async clickOnItem1() {
@@ -71,5 +75,11 @@ export class HomePage {
     }
     async clickOnItem6() {
         await this.item6.click();
+    }   
+    async clickOnMenuButton() {
+        await this.menuButton.click();
+    }
+    async clickOnLogoutButton() {
+        await this.logoutButton.click();
     }   
 }
