@@ -14,6 +14,10 @@ export class HomePage {
     addToCartButton4: Locator;
     addToCartButton5: Locator;
     addToCartButton6: Locator;
+    shoppingCartBadge: Locator;
+    title: Locator;
+    filterDropdown: Locator;
+    title2: Locator;
     
     constructor(page: Page) {
         this.page = page;
@@ -28,7 +32,13 @@ export class HomePage {
         this.addToCartButton3 = page.locator('#add-to-cart-sauce-labs-bolt-t-shirt');
         this.addToCartButton4 = page.locator('#add-to-cart-sauce-labs-fleece-jacket');
         this.addToCartButton5 = page.locator('#add-to-cart-sauce-labs-onesie');
-        this.addToCartButton6 = page.locator('#add-to-cart-test.allthethings()-t-shirt-red');
+        this.addToCartButton6 = page.locator('//button[contains(@id, "allthethings")]');
+        this.shoppingCartBadge = page.locator('#shopping_cart_container');
+        this.title = page.getByText('Swag Labs');
+        this.filterDropdown = page.locator('.product_sort_container');
+        this.title2 = page.getByText('Products');
+
+
     }
     async clickOnItem1() {
         await this.item1.click();
