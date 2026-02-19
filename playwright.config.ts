@@ -25,7 +25,10 @@ export default defineConfig({
   reporter: [
     ['html'],
     ['list'],
-    ['allure-playwright']
+    ['allure-playwright', { 
+      outputFolder: 'allure-results',
+      detail: true // Tohle zapne zobrazení jednotlivých kliknutí a akcí jako stepy
+    }]
   ],
   
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -35,6 +38,9 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure', // Allure ho automaticky přiloží k chybnému testu
+    video: 'retain-on-failure',    // Přidá videozáznam selhání
+    actionTimeout: 10 * 1000,
   },
 
   /* Configure projects for major browsers */
