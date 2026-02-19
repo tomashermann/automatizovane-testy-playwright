@@ -5,8 +5,8 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    # Tato změna zajistí spuštění každých 10 minut
-    - cron: '*/10 * * * *'
+    # Testy se spustí vždy na začátku každé hodiny (např. 8:00, 9:00, 10:00...)
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
