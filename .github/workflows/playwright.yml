@@ -4,11 +4,14 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  schedule:
+    - cron: '0 8 * * *' # Každý den v 8:00 UTC
+  workflow_dispatch: # Tlačítko pro ruční spuštění
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    # Důležité pro nahrávání na GitHub Pages
     permissions:
       contents: write
       pages: write
@@ -28,10 +31,11 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
+      id: playwright-tests # Přidali jsme ID, abychom se na tento krok mohli odkázat
       run: npx playwright test
-      continue-on-error: true # Aby workflow pokračoval i při pádu testů a vygeneroval report
+      # OSTRANĚNO continue-on-error: true
 
-    # 1. KROK: Stažení historie z gh-pages (aby fungovaly grafy trendů)
+    # 1. KROK: Stažení historie (if: always zajistí, že se to spustí i po pádu)
     - name: Get Allure history
       uses: actions/checkout@v4
       if: always()
@@ -40,7 +44,7 @@ jobs:
         ref: gh-pages
         path: gh-pages-dir
 
-    # 2. KROK: Vygenerování samotného Allure Reportu
+    # 2. KROK: Vygenerování reportu
     - name: Allure Report action
       uses: simple-elf/allure-report-action@master
       if: always()
@@ -58,14 +62,7 @@ jobs:
         publish_dir: allure-history
         publish_branch: gh-pages
 
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
-
-    # 4. KROK: Vylepšená Slack Notifikace
+    # 4. KROK: Slack Notifikace (teď už bude mluvit pravdu)
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
@@ -74,11 +71,11 @@ jobs:
         SLACK_TITLE: 'Test Report: Project TEST AUTOMATION'
         SLACK_USERNAME: 'Playwright-Bot'
         SLACK_ICON: https://playwright.dev/img/playwright-logo.svg
-        SLACK_COLOR: ${{ job.status == 'success' && '#32a852' || '#ff0000' }}
+        # Tady je ta změna: Koukáme přímo na výsledek kroku "playwright-tests"
+        SLACK_COLOR: ${{ steps.playwright-tests.outcome == 'success' && '#32a852' || '#ff0000' }}
         SLACK_MESSAGE: |
-          *Status:* ${{ job.status == 'success' && '✅ PASSED' || '❌ FAILED' }}
+          *Status:* ${{ steps.playwright-tests.outcome == 'success' && '✅ PASSED' || '❌ FAILED' }}
           *Report:* https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           *Author:* ${{ github.actor }}
-          *Branch:* `${{ github.ref_name }}`
           *Workflow:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|Zobrazit detaily v GitHubu>
         SLACK_FOOTER: 'Playwright Automated Testing'
