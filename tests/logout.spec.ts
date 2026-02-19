@@ -11,11 +11,11 @@ test.describe('Logout tests', () => {
             type: 'Test', 
             description: 'this test verifies that a user can log out successfully and is redirected to the login page' 
         });
-         test.step('Log out from the application',  () => {
-             homePage.clickOnMenuButton();
-             homePage.clickOnLogoutButton();
+         test.step('Log out from the application', async () => {
+            await homePage.clickOnMenuButton();
+            await homePage.clickOnLogoutButton();
         });
-        await test.step('Verify successful logout',  () => {
+        await test.step('Verify successful logout', async () => {
             await expect(page).toHaveURL('https://www.saucedemo.com/');
         });
     });
