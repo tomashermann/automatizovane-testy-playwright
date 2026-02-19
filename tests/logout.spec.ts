@@ -11,7 +11,8 @@ test.describe('Logout tests', () => {
             type: 'Test', 
             description: 'this test verifies that a user can log out successfully and is redirected to the login page' 
         });
-         test.step('Log out from the application', async () => {
+        await test.step('Log out from the application', async () => {
+            await homePage.clickOnMenuButton();
             await homePage.clickOnLogoutButton();
         });
         await test.step('Verify successful logout', async () => {
