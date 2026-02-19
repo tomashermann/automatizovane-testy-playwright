@@ -78,6 +78,10 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         SLACK_TITLE: 'Test Report: Project TEST AUTOMATION'
+        # --- TADY JSOU ZMĚNY PRO IKONU A JMÉNO ---
+        SLACK_USERNAME: 'Playwright-Bot' 
+        SLACK_ICON: https://playwright.dev/img/playwright-logo.svg
+        # ----------------------------------------
         SLACK_COLOR: ${{ steps.playwright-tests.outcome == 'success' && '#32a852' || '#ff0000' }}
         SLACK_MESSAGE: |
           *Status:* ${{ steps.playwright-tests.outcome == 'success' && '✅ PASSED' || '❌ FAILED' }}
