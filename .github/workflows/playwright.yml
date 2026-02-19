@@ -32,11 +32,11 @@ jobs:
 
     - name: Run Playwright tests
       id: playwright-tests
-      # PŘIDÁNO: Smazání starých výsledků před testem, aby report nelhal
+      # PŘIDÁNO: rm -rf zajistí, že v reportu nebudou staré zelené výsledky
       run: |
         rm -rf allure-results
         npx playwright test
-      continue-on-error: true # Vráceno sem, aby job neskončil dřív, než se nahraje report
+      continue-on-error: true 
 
     - name: Get Allure history
       uses: actions/checkout@v4
@@ -62,12 +62,15 @@ jobs:
         publish_dir: allure-history
         publish_branch: gh-pages
 
-    # Tato část zajistí, že GitHub označí run jako FAILED, pokud testy neprošly
+    # Tato část "shodí" celý job na červeno, pokud testy neprošly, 
+    # ale až POTÉ, co se stihl nahrát report.
     - name: Check test status
-      if: steps.playwright-tests.outcome == 'failure'
+      if: always()
       run: |
-        echo "Tests failed, marking job as failed."
-        exit 1
+        if [ "${{ steps.playwright-tests.outcome }}" == "failure" ]; then
+          echo "Testy selhaly, označuji run jako FAILED."
+          exit 1
+        fi
 
     - name: Slack Notification
       if: always()
@@ -75,12 +78,9 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         SLACK_TITLE: 'Test Report: Project TEST AUTOMATION'
-        SLACK_USERNAME: 'Playwright-Bot'
-        SLACK_ICON: https://playwright.dev/img/playwright-logo.svg
         SLACK_COLOR: ${{ steps.playwright-tests.outcome == 'success' && '#32a852' || '#ff0000' }}
         SLACK_MESSAGE: |
           *Status:* ${{ steps.playwright-tests.outcome == 'success' && '✅ PASSED' || '❌ FAILED' }}
           *Report:* https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           *Author:* ${{ github.actor }}
           *Workflow:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|Zobrazit detaily v GitHubu>
-        SLACK_FOOTER: 'Playwright Automated Testing'
