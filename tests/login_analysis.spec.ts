@@ -9,7 +9,7 @@ test('should successfully login with valid credentials', async ({ loginPage, hom
 	});
 
 	await test.step('Enter valid credentials', async () => {
-		await loginPage.enterValidEmail();
+		await loginPage.enterValidUser();
 		await loginPage.enterValidPassword();
 	});
 
