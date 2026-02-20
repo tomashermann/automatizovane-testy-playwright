@@ -51,7 +51,7 @@ test.describe('Login tests', () => {
             description: 'this test verifies that an error message is displayed when trying to log in with an invalid email' 
         });
             await test.step('Login with invalid email', async () => {
-                await loginPage.loginWithInvalidEmailAndValidPassword();
+                await loginPage.loginWithInvalidUserAndValidPassword();
             });
             await test.step('Verify error message for invalid email', async () => {
                 await expect(loginPage.errorMessageInvalidCredentials).toBeVisible();
@@ -64,7 +64,7 @@ test.describe('Login tests', () => {
             description: 'this test verifies that an error message is displayed when trying to log in with an invalid password' 
         });
             await test.step('Login with invalid password', async () => {
-                await loginPage.loginWithValidEmailAndInvalidPassword();
+                await loginPage.loginWithValidUserAndInvalidPassword();
             });
             await test.step('Verify error message for invalid password', async () => {  
                 await expect(loginPage.errorMessageInvalidCredentials).toBeVisible();

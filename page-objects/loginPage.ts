@@ -2,79 +2,87 @@ import { Locator, Page } from '@playwright/test';
 
 export class LoginPage {
     page: Page;
-    emailInput: Locator;
+    userInput: Locator;
     passwordInput: Locator;
     loginButton: Locator;
     errorMessageInvalidCredentials: Locator;
     errorMessageEmptyCredentials: Locator;
+    errorMessagePasswordRequired: Locator;
     errorMessageLockedOutUser: Locator;
+    errorContainer: Locator;
+    errorCointainerCrossButton: Locator;
+    loginLogo: Locator;
    
     
     constructor(page: Page) {
         this.page = page;
-        this.emailInput = page.locator('#user-name');
+        this.userInput = page.locator('#user-name');
         this.passwordInput = page.locator('#password');
         this.loginButton = page.locator('#login-button');
         this.errorMessageInvalidCredentials = page.getByText('Epic sadface: Username and password do not match any user in this service');
         this.errorMessageEmptyCredentials = page.getByText('Epic sadface: Username is required');
+        this.errorMessagePasswordRequired = page.getByText('Epic sadface: Password is required');
         this.errorMessageLockedOutUser = page.getByText('Epic sadface: Sorry, this user has been locked out.');
+        this.errorContainer = page.locator('[data-test="error"]');
+        this.errorCointainerCrossButton = page.locator('[data-test="error-button"]');
+        this.loginLogo = page.getByTestId('login-button')
     
     }
 
-    async goToLoginPage() {
+    async goToLoginPage(): Promise<void> {
         await this.page.goto('https://www.saucedemo.com/');
     }
 
-    async enterInvalidEmail() {
-        await this.emailInput.fill('invalid_email@gmai.com');
+    async enterInvalidUser(): Promise<void> {
+        await this.userInput.fill('invalid_user@gmai.com');
     }
 
-    async enterInvalidPassword() {
+    async enterInvalidPassword(): Promise<void> {
         await this.passwordInput.fill('invalid_password');
     }
 
-    async enterValidEmail() {
-        await this.emailInput.fill('standard_user');
+    async enterValidUser(): Promise<void> {
+        await this.userInput.fill('standard_user');
     }
 
-    async enterValidPassword() {
+    async enterValidPassword(): Promise<void> {
         await this.passwordInput.fill('secret_sauce');
     }
-    async enterLockedOutUserEmail() {
-        await this.emailInput.fill('locked_out_user');
+    async enterLockedOutUser(): Promise<void> {
+        await this.userInput.fill('locked_out_user');
     }
 
-    async clickLoginButton() {
+    async clickLoginButton(): Promise<void> {
         await this.loginButton.click();
     }
 
-    async loginWithValidCredentials() {
-        await this.enterValidEmail();
+    async loginWithValidCredentials(): Promise<void> {
+        await this.enterValidUser();
         await this.enterValidPassword();
         await this.clickLoginButton();
     }
-    async loginWithInvalidCredentials() {
-        await this.enterInvalidEmail();
+    async loginWithInvalidCredentials(): Promise<void> {
+        await this.enterInvalidUser();
         await this.enterInvalidPassword();
         await this.clickLoginButton();
     }
-    async loginWithEmptyCredentials() {
+    async loginWithEmptyCredentials(): Promise<void> {
         await this.clickLoginButton();
     }
-    async loginWithValidEmailAndInvalidPassword() {
-        await this.enterValidEmail();
+    async loginWithValidUserAndInvalidPassword(): Promise<void> {
+        await this.enterValidUser();
         await this.enterInvalidPassword();
         await this.clickLoginButton();
     }
-    async loginWithInvalidEmailAndValidPassword() {
-        await this.enterInvalidEmail();
+    async loginWithInvalidUserAndValidPassword(): Promise<void> {
+        await this.enterInvalidUser();
         await this.enterValidPassword();
         await this.clickLoginButton();  
     }
 
-    async loginWithLockedOutUser() {
-        await this.enterLockedOutUserEmail();
+    async loginWithLockedOutUser(): Promise<void> {
+        await this.enterLockedOutUser();
         await this.enterValidPassword();
         await this.clickLoginButton();
     } 
-}
+} 
