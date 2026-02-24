@@ -61,4 +61,21 @@ test.describe('Sauce Labs Fleece Jacket', () => {
             await expect(headerComponentPage.shoppingCartBadge).not.toBeVisible();
         });
     });
- });    
+    test('Verify that the user can navigate back to products page from the Sauce Labs Fleece Jacket product page @Regression', async ({ homePage, sauceLabsFleeceJacketPage, page }) => {
+        test.info().annotations.push({ 
+            type: 'Test', 
+            description: 'this test verifies that the user can navigate back to products page from the Sauce Labs Fleece Jacket product page successfully' 
+        });
+        await test.step('Navigate to the Sauce Labs Fleece Jacket product page', async () => {
+            await homePage.clickOnItem4();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory-item.html?id=5");
+        });
+        await test.step('Navigate back to products page', async () => {
+            await sauceLabsFleeceJacketPage.backToProducts.click();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+        });
+        await test.step('Verify that the user is navigated back to products page successfully', async () => {
+            await homePage.checkAllElements();
+        });
+    });
+});    
