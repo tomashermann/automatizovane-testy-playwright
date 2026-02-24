@@ -1,0 +1,30 @@
+import test, { expect } from '../fixtures/basePages';
+
+test.describe('Sauce Labs Onesie', () => {
+    test.beforeEach(async ({ loginPage, homePage }) => {
+        await loginPage.goToLoginPage();
+        await loginPage.loginWithValidCredentials();
+    });
+    
+    test('Verify that the Sauce Labs Onesie product page displays correct information @Regression', async ({ homePage, sauceLabsOnesiePage, page }) => {
+        test.info().annotations.push({
+            type: 'Test',
+            description: 'this test verifies that the Sauce Labs Onesie product page displays the correct information such as product name, description, price, and add to cart button'
+        });
+        await test.step('Navigate to the Sauce Labs Onesie product page', async () => {
+            await homePage.clickOnItem5();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory-item.html?id=2");
+        });
+        await test.step('Verify product information is displayed correctly', async () => {
+            await expect(sauceLabsOnesiePage.image).toBeVisible();
+            await expect(sauceLabsOnesiePage.title).toBeVisible();
+            await expect(sauceLabsOnesiePage.title).toHaveText('Sauce Labs Onesie');
+            await expect(sauceLabsOnesiePage.description).toBeVisible();
+            await expect(sauceLabsOnesiePage.description).toHaveText('Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won\'t unravel.');
+            await expect(sauceLabsOnesiePage.price).toBeVisible();
+            await expect(sauceLabsOnesiePage.price).toHaveText('$7.99');
+            await expect(sauceLabsOnesiePage.addToCartButton).toBeVisible();
+            await expect(sauceLabsOnesiePage.addToCartButton).toHaveText('Add to cart');
+        });
+    });
+});

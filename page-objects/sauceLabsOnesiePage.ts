@@ -13,7 +13,7 @@ export class SauceLabsOnesiePage {
     constructor(page: Page) {
         this.page = page;
         this.backToProducts = page.locator('#back-to-products');
-        this.image = page.getByTestId('item-sauce-labs-bike-light-img');
+        this.image = page.getByTestId('item-sauce-labs-onesie-img');
         this.title = page.getByTestId('inventory-item-name');
         this.description = page.getByTestId('inventory-item-desc');
         this.price = page.getByTestId('inventory-item-price');
