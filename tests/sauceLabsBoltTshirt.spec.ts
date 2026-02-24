@@ -61,4 +61,21 @@ test.describe('Sauce Labs Bolt T-shirt', () => {
             await expect(headerComponentPage.shoppingCartBadge).not.toBeVisible();
         });
     });
+    test('Verify that the user can navigate back to products page from the Sauce Labs Bolt T-shirt product page @Regression', async ({ homePage, sauceLabsBoltTshirtPage, page }) => {
+        test.info().annotations.push({ 
+            type: 'Test', 
+            description: 'this test verifies that the user can navigate back to products page from the Sauce Labs Bolt T-shirt product page successfully' 
+        });
+        await test.step('Navigate to the Sauce Labs Bolt T-shirt product page', async () => {
+            await homePage.clickOnItem3();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory-item.html?id=1");
+        });
+        await test.step('Navigate back to products page', async () => {
+            await sauceLabsBoltTshirtPage.clickBackToProductsButton();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+        });
+        await test.step('Verify that the user is navigated back to the products page successfully', async () => {
+            await homePage.checkAllElements();
+        });
+    });
 });

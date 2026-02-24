@@ -9,6 +9,7 @@ export class SauceLabsFleeceJacketPage {
     price: Locator;
     addToCartButton: Locator
     removeButton: Locator;
+    backToProductsButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -19,11 +20,15 @@ export class SauceLabsFleeceJacketPage {
         this.price = page.getByTestId('inventory-item-price');
         this.addToCartButton = page.locator('#add-to-cart');
         this.removeButton = page.locator('#remove');
+        this.backToProductsButton = page.locator('#back-to-products');
     }
     async clickAddToCartButton(){
         await this.addToCartButton.click();
     }
     async clickRemoveButton(){
         await this.removeButton.click();
+    }
+    async clickBackToProductsButton(){
+        await this.backToProductsButton.click();
     }
 }   

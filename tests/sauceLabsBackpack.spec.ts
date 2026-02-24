@@ -61,4 +61,21 @@ test.describe('Sauce Labs Backpack tests', () => {
             await expect(headerComponentPage.shoppingCartBadge).not.toBeVisible();
         });
     });
+    test('Verify that the user can navigate back to the home page from the Sauce Labs Backpack product page @Regression', async ({ homePage, sauceLabsBackpackPage, page }) => {
+        test.info().annotations.push({ 
+            type: 'Test', 
+            description: 'this test verifies that the user can navigate back to the home page from the Sauce Labs Backpack product page using the back button and that they are redirected to the home page successfully' 
+        });
+        await test.step('Navigate to the Sauce Labs Backpack product page', async () => {
+            await homePage.clickOnItem1();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory-item.html?id=4");
+        });
+        await test.step('Navigate back to the home page', async () => {
+            await sauceLabsBackpackPage.clickBackToProductsButton();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+        });
+        await test.step('Verify that the user is redirected to the home page successfully', async () => {
+            await homePage.checkAllElements();
+        });
+    });
 });
