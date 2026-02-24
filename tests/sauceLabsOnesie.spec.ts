@@ -5,6 +5,9 @@ test.describe('Sauce Labs Onesie', () => {
         await loginPage.goToLoginPage();
         await loginPage.loginWithValidCredentials();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
     
     test('Verify that the Sauce Labs Onesie product page displays correct information @Regression', async ({ homePage, sauceLabsOnesiePage, page }) => {
         test.info().annotations.push({

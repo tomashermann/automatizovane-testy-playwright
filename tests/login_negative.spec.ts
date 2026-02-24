@@ -3,8 +3,11 @@ import test, { expect } from '../fixtures/basePages';
 test.describe('Login - Negative Tests', () => {
     test.beforeEach(async ({ loginPage, page }) => {
         await loginPage.goToLoginPage();
-    
     });
+     test.afterEach(async ({ context }) => {
+         await context.close();
+    });
+
   test('should show error for locked_out_user', async ({ loginPage, page }) => {
     test.info().annotations.push({ type: 'Test', description: 'Negative - locked_out_user blocked' });
 

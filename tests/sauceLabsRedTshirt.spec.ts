@@ -5,6 +5,9 @@ test.describe('Sauce Labs Red T-Shirt', () => {
         await loginPage.goToLoginPage();
         await loginPage.loginWithValidCredentials();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
 
     test('Verify that the Sauce Labs Red T-Shirt product page displays correct information @Regression', async ({ homePage, sauceLabsRedTshirtPage, page }) => {
         test.info().annotations.push({ 

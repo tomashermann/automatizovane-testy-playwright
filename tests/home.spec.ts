@@ -5,6 +5,9 @@ import test, { expect } from '../fixtures/basePages';
             await loginPage.goToLoginPage();
             await loginPage.loginWithValidCredentials();
         });
+    test.afterEach(async ({ context }) => {
+         await context.close();
+        });
     
     test('Verify home title and filter dropdown @Regression,@Smoke', async ({ homePage }) => {
         test.info().annotations.push({ 

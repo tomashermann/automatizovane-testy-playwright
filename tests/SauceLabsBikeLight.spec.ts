@@ -5,6 +5,9 @@ test.describe('Sauce Labs Bike Light tests', () => {
         await loginPage.goToLoginPage();
         await loginPage.loginWithValidCredentials();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
 
     test('Verify that the Sauce Labs Bike Light product page displays correct information @Regression', async ({ homePage, sauceLabsBikeLightPage, page }) => {
         test.info().annotations.push({ 

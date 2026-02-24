@@ -5,6 +5,9 @@ test.describe('Sauce Labs Backpack tests', () => {
         await loginPage.goToLoginPage();
         await loginPage.loginWithValidCredentials();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
 
     test('Verify that the Sauce Labs Backpack product page displays correct information @Regression', async ({ homePage, sauceLabsBackpackPage, page }) => {
         test.info().annotations.push({ 

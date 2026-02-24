@@ -5,6 +5,9 @@ test.describe('Sauce Labs Fleece Jacket', () => {
         await loginPage.goToLoginPage();
         await loginPage.loginWithValidCredentials();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
     
     test('Verify that the Sauce Labs Fleece Jacket product page displays correct information @Regression', async ({ homePage, sauceLabsFleeceJacketPage, page }) => {
         test.info().annotations.push({ 

@@ -4,6 +4,9 @@ test.describe('Login tests', () => {
     test.beforeEach(async ({ loginPage }) => {
         await loginPage.goToLoginPage();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
 
     test('login with valid credentials @Regression,@Smoke,@Sanity', async ({ page, loginPage, homePage }) => {
         test.info().annotations.push({ 
