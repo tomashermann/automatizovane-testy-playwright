@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-export class SauceLabsPage {
+export class SauceLabsBackpackPage {
     page: Page
     backToProducts: Locator;
     image: Locator;
@@ -21,4 +21,11 @@ export class SauceLabsPage {
         this.addToCartButton = page.locator('#add-to-cart');
         this.removeButton = page.locator('#remove-sauce-labs-backpack');
         }
+
+    async clickAddToCartButton(){
+        await this.addToCartButton.click();
+    }
+    async clickRemoveButton(){
+        await this.removeButton.click();
+    }
 }
