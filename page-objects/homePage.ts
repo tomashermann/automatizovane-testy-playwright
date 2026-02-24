@@ -82,4 +82,23 @@ export class HomePage {
     async clickOnLogoutButton() {
         await this.logoutButton.click();
     }   
-}
+    async checkAllElements() {
+        await this.item1.isVisible();
+        await this.item2.isVisible();
+        await this.item3.isVisible();
+        await this.item4.isVisible();
+        await this.item5.isVisible();
+        await this.item6.isVisible();
+        await this.addToCartButton1.isVisible();
+        await this.addToCartButton2.isVisible();
+        await this.addToCartButton3.isVisible();
+        await this.addToCartButton4.isVisible();
+        await this.addToCartButton5.isVisible();
+        await this.addToCartButton6.isVisible();
+        await this.shoppingCartBadge.isVisible();
+        await this.title.isVisible();
+        await this.filterDropdown.isVisible();
+        await this.title2.isVisible();
+
+    }
+}   

@@ -8,6 +8,7 @@ import { SauceLabsBoltTshirtPage } from '../page-objects/sauceLabsBoltTshirtPage
 import { SauceLabsBackpackPage } from '../page-objects/sauceLabsBackpackPage';
 import { SauceLabsRedTshirtPage } from '../page-objects/sauceLabsRedTshirtPage';
 import { SauceLabsOnesiePage } from '../page-objects/sauceLabsOnesiePage';
+import { HeaderComponentPage } from '../page-objects/headerComponentPage';
 
 const test = baseTest.extend<{
     loginPage: LoginPage;
@@ -18,6 +19,7 @@ const test = baseTest.extend<{
     sauceLabsBackpackPage: SauceLabsBackpackPage;    
     sauceLabsRedTshirtPage: SauceLabsRedTshirtPage;
     sauceLabsOnesiePage: SauceLabsOnesiePage;
+    headerComponentPage: HeaderComponentPage;
 
 }>({
     loginPage: async ({ page }, use) => {
@@ -44,7 +46,10 @@ const test = baseTest.extend<{
     },
     sauceLabsOnesiePage: async ({ page }, use) => {
         await use(new SauceLabsOnesiePage(page));
-    }
+    },
+    headerComponentPage: async ({ page }, use) => {
+        await use(new HeaderComponentPage(page));
+    },
 });
 
 export default test;

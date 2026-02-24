@@ -19,7 +19,7 @@ export class SauceLabsBackpackPage {
         this.description = page.getByText('carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
         this.price = page.getByText('$29.99');
         this.addToCartButton = page.locator('#add-to-cart');
-        this.removeButton = page.locator('#remove-sauce-labs-backpack');
+        this.removeButton = page.locator('#remove');
         }
 
     async clickAddToCartButton(){
