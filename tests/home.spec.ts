@@ -1,5 +1,4 @@
 import test, { expect } from '../fixtures/basePages';
-import { SauceLabsPage } from '../page-objects/sauceLabsPage';
 
     test.describe('Home tests', () => {
         test.beforeEach(async ({ loginPage }) => {
