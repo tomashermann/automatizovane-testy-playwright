@@ -5,6 +5,9 @@ test.describe('Logout tests', () => {
         await loginPage.goToLoginPage();
         await loginPage.loginWithValidCredentials();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
     
     test('Verify user can log out successfully @Regression,@Smoke', async ({ page, homePage }) => {
         test.info().annotations.push({ 

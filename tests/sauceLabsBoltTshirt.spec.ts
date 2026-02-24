@@ -5,6 +5,9 @@ test.describe('Sauce Labs Bolt T-shirt', () => {
         await loginPage.goToLoginPage();
         await loginPage.loginWithValidCredentials();
     });
+ test.afterEach(async ({ context }) => {
+         await context.close();
+        });
 
     test('Verify that the Sauce Labs Bolt T-shirt product page displays correct information @Regression', async ({ homePage, sauceLabsBoltTshirtPage, page }) => {
         test.info().annotations.push({ 
