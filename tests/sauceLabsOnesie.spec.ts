@@ -27,4 +27,38 @@ test.describe('Sauce Labs Onesie', () => {
             await expect(sauceLabsOnesiePage.addToCartButton).toHaveText('Add to cart');
         });
     });
+    test('Verify that the user can add the Sauce Labs Onesie to the cart @Regression', async ({ homePage, sauceLabsOnesiePage, headerComponentPage, page }) => {
+        test.info().annotations.push({
+            type: 'Test',
+            description: 'this test verifies that the user can add the Sauce Labs Onesie to the cart and that it appears in the cart with the correct information'
+        });
+        await test.step('Navigate to the Sauce Labs Onesie product page', async () => {
+            await homePage.clickOnItem5();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory-item.html?id=2");
+        });
+        await test.step('Add the product to the cart', async () => {
+            await sauceLabsOnesiePage.addToCartButton.click();
+            await expect(headerComponentPage.shoppingCartBadge).toBeVisible();
+            await expect(headerComponentPage.shoppingCartBadge).toHaveText('1');
+        });
+    });
+    test('Verify that the user can remove the Sauce Labs Onesie from the cart @Regression', async ({ homePage, sauceLabsOnesiePage, headerComponentPage, page }) => {
+        test.info().annotations.push({
+            type: 'Test',
+            description: 'this test verifies that the user can remove the Sauce Labs Onesie from the cart and that it is removed from the cart successfully'
+        });
+        await test.step('Navigate to the Sauce Labs Onesie product page', async () => {
+            await homePage.clickOnItem5();
+            await expect(page).toHaveURL("https://www.saucedemo.com/inventory-item.html?id=2");
+        });
+        await test.step('Add the product to the cart', async () => {
+            await sauceLabsOnesiePage.addToCartButton.click();
+            await expect(headerComponentPage.shoppingCartBadge).toBeVisible();
+            await expect(headerComponentPage.shoppingCartBadge).toHaveText('1');
+        });
+        await test.step('Remove the product from the cart', async () => {
+            await sauceLabsOnesiePage.removeButton.click();
+            await expect(headerComponentPage.shoppingCartBadge).not.toBeVisible();
+        });
+    });
 });
