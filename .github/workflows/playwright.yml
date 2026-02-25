@@ -6,7 +6,7 @@ on:
     branches: [ main, master ]
   schedule:
     # Testy se spustí vždy na začátku každé hodiny (např. 8:00, 9:00, 10:00...)
-    - cron: '0 * * * *'
+   - cron: '0 8 * * *'
   workflow_dispatch:
 
 jobs:
